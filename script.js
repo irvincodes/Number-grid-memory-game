@@ -47,8 +47,11 @@ const app = {
   playerInput: [],
   playerScore: 0,
   screen: "welcome",
-  timer: 2,
+  timer: 2000,
 };
+
+const shuffledArr = app.numArr.sort(() => Math.random() - 0.5);
+console.log(shuffledArr);
 
 /*----- cached elements  -----*/ // -> Any cached elements e.g const welcomeScreen = document.querySelector("#welcome");
 const welcomeScreen = document.getElementById("welcome");
@@ -63,21 +66,19 @@ const screens = [
 ];
 const mainButton = document.getElementById("button");
 const grid = document.getElementById("grid");
-const squares = Array.from(document.getElementsByClassName("square"));
-console.log(squares);
+const squares = document.getElementsByClassName("square");
+const squaresArr = Array.from(document.getElementsByClassName("square"));
+console.log(squaresArr);
 
 /*----- event listeners -----*/ // -> Any functions that invokes an event listener action to happen e.g function clickStartButton() {game.screen = "game"; renderAll(); }
 
 const fillSquare = () => {
-  const shuffledArr = app.numArr.sort(() => Math.random() - 0.5);
-  console.log(shuffledArr);
-  for (i = 0; i < squares.length && i < shuffledArr.length; i++) {
-    squares[i].textContent = shuffledArr[i];
+  for (i = 0; i < squaresArr.length && i < shuffledArr.length; i++) {
+    squaresArr[i].textContent = shuffledArr[i];
   }
-  squares.forEach((sq) => sq.classList.add("hide"));
+  console.log(shuffledArr.splice(0, 2));
+  squaresArr.forEach((sq) => sq.classList.add("hide"));
 };
-
-fillSquare();
 
 //   const random = Math.floor(Math.floor(Math.random() * numArr.length);)
 
@@ -95,15 +96,87 @@ fillSquare();
 
 // hideSquare();
 
-// // const startNumFlash =
+// const flashTwo = () => {
+//   for (i = 0; i < 8; i += 2) {
+//     squaresArr[shuffledArr[i]].classList.remove("hide");
+//     squaresArr[shuffledArr[i + 1]].classList.remove("hide");
+//     // squares[shuffledArr.splice(i, i + 1)].classList.remove("hide");
+//   }
+// };
+// const timerTwo = setInterval(flashTwo(), 2000);
+// const hideTwoSquares = () => {
+//   squares[shuffledArr[shuffledArrIdx]].classList.add("hide");
+//   console.log("H: " + squares[shuffledArr[shuffledArrIdx]]);
+//   squares[shuffledArr[shuffledArrIdx - 1]].classList.add("hide");
+// };
+
+// hideTwoSquares();
+
+let shuffledArrIdx = 7;
+const flashTwo = () => {
+  squares[shuffledArr[shuffledArrIdx]].classList.remove("hide");
+  squares[shuffledArr[shuffledArrIdx - 1]].classList.remove("hide");
+  console.log(squares[shuffledArr[shuffledArrIdx]]);
+  console.log(squares[shuffledArr[shuffledArrIdx - 1]]);
+  const hideTwoSquares = () => {
+    squares[shuffledArr[shuffledArrIdx]].classList.add("hide");
+    squares[shuffledArr[shuffledArrIdx - 1]].classList.add("hide");
+    console.log(squares[shuffledArr[shuffledArrIdx]]);
+    console.log(squares[shuffledArr[shuffledArrIdx - 1]]);
+  };
+  const setHideSquares = setTimeout(hideTwoSquares, 1900);
+  const reduceShuffledArrIdx = () => (shuffledArrIdx -= 2);
+  const setReduceShuffledArrIdx = setTimeout(reduceShuffledArrIdx, 1950);
+};
+
+// flashTwo();
+
+const flashFour = () => {
+  squares[shuffledArr[shuffledArrIdx + 1]].classList.remove("hide");
+  squares[shuffledArr[shuffledArrIdx + 2]].classList.remove("hide");
+  squares[shuffledArr[shuffledArrIdx + 3]].classList.remove("hide");
+  squares[shuffledArr[shuffledArrIdx + 4]].classList.remove("hide");
+  shuffledArrIdx += 4;
+};
+
+const fourSecFlash = () => {
+  setInterval(flashFour, app.timer * 1.5);
+};
+
+const startNumFlash = () => {
+  clickStart();
+  const twoSecFlash = setInterval(flashTwo, app.timer);
+  const twoSecTimeOut = () => {
+    clearInterval(twoSecFlash);
+  };
+  setTimeout(twoSecTimeOut, app.timer * 4);
+  const startFourSecFlash = setTimeout(fourSecFlash, app.timer * 4);
+  const fourSecTimeOut = () => {
+    clearInterval(startFourSecFlash);
+  };
+  setTimeout(fourSecTimeOut, app.timer * 2);
+};
+
+// const timeOut = () => {
+//   setTimeout(twoSecTimeOut, 6000);
+//   setTimeout(fourSecTimeOut, 14000);
+// };
+// const twoSecTimeOut = () => {
+//   clearInterval(startNumFlash);
+// };
+// const fourSecTimeOut = () => {
+//   clearInterval;
+// };
 
 const clickStart = () => {
-  mainButton.addEventListener("click", startNumFlash());
   app.screen = "numFlash";
   renderAll();
 };
 
+const clickCalcScore = () => {};
+
 /*----- functions -----*/ // -> All other functions e.g renderScreen(), renderAll(), main()
+
 const renderAll = () => {
   renderScreen();
 };
@@ -113,6 +186,16 @@ const renderScreen = () => {
     s.classList.add("hide");
   });
   const currScreen = document.querySelector("#" + app.screen);
+  console.log(currScreen);
   currScreen.classList.remove("hide");
 };
-renderAll();
+
+const main = () => {
+  fillSquare();
+  mainButton.addEventListener("click", startNumFlash);
+  // mainButton.addEventListener("click", startNumFlashFour)
+  renderAll();
+};
+
+main();
+// console.log(squares[0]);

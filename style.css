@@ -76,8 +76,15 @@ button:disabled {
 button:hover:not(:disabled) {
   background-color: white;
   color: grey;
+  cursor: pointer;
 }
 
 .hide {
   display: none;
+}
+
+.hide-transition {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
 }
