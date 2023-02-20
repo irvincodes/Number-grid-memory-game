@@ -14,6 +14,14 @@ h2 {
   margin-bottom: 5vmin;
 }
 
+#numFlash {
+  color: maroon;
+}
+
+#playerAns {
+  color: darkgreen;
+}
+
 body {
   height: 100vh;
   margin: 0;
@@ -36,11 +44,30 @@ body {
 #grid > div {
   height: 6vh;
   width: 6vh;
+  margin: 1.5vh;
+  /* padding: 0.5vh 0 0 0; */
+  background-color: antiquewhite;
+  border: 0.2vmin solid rgb(255, 255, 255);
+  border-radius: 20%;
+}
+
+input {
+  height: 5.6vh;
+  width: 5.6vh;
+  margin: 0;
+  padding: 0;
+  border-radius: 20%;
+  text-align: center;
+  font-size: 4vmin;
+  background-color: antiquewhite;
+  border: 0 solid rgb(255, 255, 255);
+  /* height: 6vh;
+  width: 6vh;
   margin: 1vh;
   padding: 0.5vh 0;
   background-color: antiquewhite;
   border: 0.2vmin solid rgb(255, 255, 255);
-  border-radius: 20%;
+  border-radius: 20%; */
 }
 
 .square {
@@ -65,7 +92,7 @@ button {
   background-color: grey;
   color: white;
   border-radius: 2vmin;
-  font-size: 4vmin;
+  font-size: 3.5vmin;
 }
 
 button:disabled {

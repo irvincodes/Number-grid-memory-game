@@ -51,7 +51,7 @@ const app = {
 };
 
 const shuffledArr = app.numArr.sort(() => Math.random() - 0.5);
-console.log("shuffledArr", shuffledArr, JSON.stringify(shuffledArr));
+console.log("shuffledArr", shuffledArr);
 
 /*----- cached elements  -----*/ // -> Any cached elements e.g const welcomeScreen = document.querySelector("#welcome");
 const welcomeScreen = document.getElementById("welcome");
@@ -64,6 +64,15 @@ const screens = [
   playerAnsScreen,
   showScoreScreen,
 ];
+const mainDivArr = Array.from(document.getElementsByClassName("main-div"));
+// const getMainDivArr = () => {
+//   for (i = 1; i <= app.numArr.length; i++) {
+//     let divSq = document.getElementById(`sq-${i}`);
+//     mainDivArr.push(divSq);
+//   }
+// };
+console.log("mainDivArr: ", mainDivArr);
+
 const mainButton = document.getElementById("button");
 const grid = document.getElementById("grid");
 const squares = document.getElementsByClassName("square");
@@ -72,14 +81,6 @@ console.log("squaresArr", squaresArr);
 console.log("squares", squares);
 
 /*----- event listeners -----*/ // -> Any functions that invokes an event listener action to happen e.g function clickStartButton() {game.screen = "game"; renderAll(); }
-
-const fillSquare = () => {
-  for (i = 0; i < squaresArr.length && i < shuffledArr.length; i++) {
-    console.log("fillSquare loop", squaresArr[i].textContent, shuffledArr[i]);
-    squaresArr[i].textContent = shuffledArr[i];
-  }
-  squaresArr.forEach((sq) => sq.classList.add("hide"));
-};
 
 let shuffledArrIdx = 0;
 const gridElement = document.getElementById("grid");
@@ -126,11 +127,6 @@ const flashThree = () => {
   setTimeout(incrShuffledArrIdx, 500);
 };
 
-// const fourSecFlash = () => {
-//   console.log("fourSecFlash() fired");
-//   setInterval(flashFour, app.timer * 1.5);
-// };
-
 const startNumFlash = () => {
   clickStart();
   let count = 0;
@@ -162,13 +158,71 @@ const clickStart = () => {
   renderAll();
 };
 
+const showInputFields = () => {
+  console.log("before remove squares: ", grid);
+  while (squares.length > 0) {
+    squares[0].parentNode.removeChild(squares[0]);
+  }
+  console.log("removed squares: ", grid);
+  mainDivArr.forEach((d) => {
+    const createInput = document.createElement("input");
+    createInput.setAttribute("type", "value");
+    d.appendChild(createInput);
+    console.log("added input fields: ", d);
+  });
+  // const createInput = document.createElement("input");
+  // createInput.setAttribute("type", "value");
+  // console.log("input: ", createInput);
+  // // while (i < squares.length) {
+  // //   grid.appendChild(createInput);
+  // //   i++;
+  // // }
+  // mainDivArr.forEach((d) => d.appendChild(createInput));
+  // console.log("added input fields: ", mainDivArr);
+  for (i = 1; i <= app.numArr; i++) {
+    const inputList = document.getElementsByTagName("input");
+    console.log("inputList: ", inputList);
+    inputList.forEach.setAttribute("id", `input-${i}`);
+  }
+  console.log("added id to all inputs: ", mainDivArr);
+};
+
 const playerAns = () => {
   app.screen = "playerAns";
-  mainButton.textContent = "Lock'em in.";
+  mainButton.textContent = "See my score!";
+  showInputFields();
+  console.log("showInputFields() fired");
+  mainButton.removeEventListener("click", playerAns);
+  mainButton.addEventListener("click", clickCalcScore);
   renderAll();
 };
 
-const clickCalcScore = () => {};
+const calcScore = () => {
+  mainDivArr.forEach((d) => {
+    const playerInput = d.firstChild.value;
+    console.log("input: ", playerInput);
+    app.playerInput.push(playerInput);
+  });
+  console.log("playerInputs: ", app.playerInput);
+  for (i = 0; i < shuffledArr.length; i++) {
+    if (app.playerInput[i] == shuffledArr[i]) {
+      app.playerScore += 1;
+    }
+  }
+  console.log("Player score: ", app.playerScore);
+  const scoreMsg = (document.getElementById("showScore").textContent =
+    "YOUR SCORE: " + app.playerScore);
+  document.getElementById("showScore").style.marginBottom = "10vm";
+  return scoreMsg;
+};
+
+const clickCalcScore = () => {
+  app.screen = "showScore";
+  mainButton.textContent = "Restart Game";
+  calcScore();
+
+  renderAll();
+};
 
 /*----- functions -----*/ // -> All other functions e.g renderScreen(), renderAll(), main()
 
@@ -185,8 +239,23 @@ const renderScreen = () => {
   currScreen.classList.remove("hide");
 };
 
+const fillSquare = () => {
+  for (i = 0; i < squaresArr.length && i < shuffledArr.length; i++) {
+    console.log("fillSquare loop", squaresArr[i].textContent, shuffledArr[i]);
+    squaresArr[i].textContent = shuffledArr[i];
+  }
+  squaresArr.forEach((sq) => sq.classList.add("hide"));
+};
+
+// const hideInputFields = () => {
+//   for (i = 1; i <= squares.length; i++) {
+//     document.querySelector(`#input-${i}`).classList.add("hide");
+//   }
+// };
+
 const main = () => {
   fillSquare();
+  // hideInputFields();
   mainButton.addEventListener("click", startNumFlash);
   renderAll();
 };
