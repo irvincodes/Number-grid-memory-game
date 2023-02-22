@@ -236,8 +236,8 @@ const calcScore = () => {
     }
   }
   console.log("Player score: ", app.playerScore);
-  const scoreMsg = (document.getElementById("showScore").textContent =
-    "YOUR SCORE: " + app.playerScore);
+  const scoreMsg = (document.getElementById("showScore").innerHTML =
+    "<h2>YOUR SCORE: " + app.playerScore + "</h2>");
   document.getElementById("showScore").style.marginBottom = "10vm";
   return scoreMsg;
 };

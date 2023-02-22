@@ -15,19 +15,35 @@
         margin: 0;
       }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>The Number Grid Memory Game</h1>
-    <div id="welcome">
-      <h2>Press START To Play!</h2>
+    <!-- <div class="wrapper">
+      <div class="img-area">
+        <div class="single-img"></div> -->
+    <!-- <div class="wallpaper"> -->
+    <div class="header">
+      <h1>The Number Grid Memory Game</h1>
     </div>
-    <div id="numFlash">
-      <h2>Focus and memorise the position of each flashed number!</h2>
+    <div id="welcome" class="header">
+      <p class="intro">
+        The game will flash numbers 1 to 16 on the grid, test your focus and
+        memory by remembering their positions.
+      </p>
+      <h2>Press START To Play</h2>
     </div>
-    <div id="playerAns">
+    <div id="numFlash" class="header">
+      <h2>Focus and memorise the position of each flashed number...</h2>
+    </div>
+    <div id="playerAns" class="header">
       <h2>Click each square and input your answer. Good Luck! 🍀</h2>
     </div>
-    <div id="showScore">
+    <div id="showScore" class="header">
       <h2>Your score:</h2>
     </div>
     <main id="grid">
@@ -49,6 +65,9 @@
       <div id="sq-16" class="main-div"><p class="square"></p></div>
     </main>
     <button id="button">START</button>
+    <!-- </div> -->
+    <!-- </div>
+    </div> -->
   </body>
 </html>
 
