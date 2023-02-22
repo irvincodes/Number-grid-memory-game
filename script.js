@@ -225,6 +225,11 @@ const calcScore = () => {
     if (app.playerInput[i] == shuffledArr[i]) {
       if (app.playerInput[i] <= 16 && app.playerInput[i] >= 0) {
         app.playerScore += 1;
+        const inputList = document.getElementsByTagName("input");
+        inputList[i].style.backgroundColor = "green";
+        // document.getElementById(`sq-${i}`).style.borderColor = "limegreen";
+        // mainDivArr.forEach((d) => {
+        //   d.style.borderColor = "limegreen";
       }
       // else {
       //   alert("Kindly input only numbers from 1 to 16! Try again.");
@@ -233,12 +238,15 @@ const calcScore = () => {
       //   mainButton.textContent = "Re-try";
       //   break;
       // }
+    } else {
+      const inputList = document.getElementsByTagName("input");
+      inputList[i].style.backgroundColor = "darkred";
     }
   }
   console.log("Player score: ", app.playerScore);
   const scoreMsg = (document.getElementById("showScore").innerHTML =
     "<h2>YOUR SCORE: " + app.playerScore + "</h2>");
-  document.getElementById("showScore").style.marginBottom = "10vm";
+  // document.getElementById("showScore").style.marginBottom = "10vm";
   return scoreMsg;
 };
 
@@ -270,7 +278,8 @@ const restartGame = () => {
   shuffledArr = app.numArr.sort(() => Math.random() - 0.5);
   shuffledArrIdx = 0;
   mainButton.removeEventListener("click", restartGame);
-
+  app.playerInput = [];
+  app.playerScore = 0;
   main();
 };
 
