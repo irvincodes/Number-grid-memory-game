@@ -6,7 +6,6 @@
 }
 
 h1 {
-  margin-top: 0;
   margin-bottom: 5vmin;
   color: #ffffff;
   font-size: 4vh;
@@ -14,6 +13,9 @@ h1 {
 }
 
 h2 {
+  position: relative;
+  /* height: 20vmin; */
+  /* padding: 10vmin; */
   margin-top: 0;
   margin-bottom: 5vmin;
   color: #3dd3ed;
@@ -30,6 +32,7 @@ h2 {
 
 .header {
   text-align: center;
+  /* height: 14vh; */
 }
 
 p {
@@ -97,6 +100,8 @@ body {
 }
 
 #grid {
+  /* top: 50vh;
+  position: absolute; */
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 25% 25% 25% 25%;
@@ -167,6 +172,7 @@ input {
 }
 
 button {
+  position: relative;
   margin-top: 5vmin;
   padding: 1.5vmin;
   background-color: white;
