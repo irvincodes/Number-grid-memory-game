@@ -39,6 +39,7 @@ click into and enter the number.
 13. Extra Levels?
 
 
+
 /*----- constants -----*/ // -> any direct constants e.g BOARD_COLUMNS = 7
 
 /*----- state variables -----*/ // -> Model, where your main "game" or "app" object which stores data go
@@ -50,7 +51,7 @@ const app = {
   timer: 2000,
 };
 
-const shuffledArr = app.numArr.sort(() => Math.random() - 0.5);
+let shuffledArr = app.numArr.sort(() => Math.random() - 0.5);
 console.log("shuffledArr", shuffledArr);
 
 /*----- cached elements  -----*/ // -> Any cached elements e.g const welcomeScreen = document.querySelector("#welcome");
@@ -76,7 +77,7 @@ console.log("mainDivArr: ", mainDivArr);
 const mainButton = document.getElementById("button");
 const grid = document.getElementById("grid");
 const squares = document.getElementsByClassName("square");
-const squaresArr = Array.from(document.getElementsByClassName("square"));
+let squaresArr = Array.from(document.getElementsByClassName("square"));
 console.log("squaresArr", squaresArr);
 console.log("squares", squares);
 
@@ -166,7 +167,23 @@ const showInputFields = () => {
   console.log("removed squares: ", grid);
   mainDivArr.forEach((d) => {
     const createInput = document.createElement("input");
-    createInput.setAttribute("type", "value");
+    // const inputFieldAttributes = {
+    //   type: "number",
+    //   max: "16",
+    //   min: "0",
+    // };
+    // // const setInputFieldAttributes = (elem, elemAttributes) => {
+    // //   Object.keys(inputFieldAttributes).forEach((attribute) => {
+    // //     elem.setAttribute(attribute, elemAttributes[attribute]);
+    // //   });
+    // //   setInputFieldAttributes(createInput, inputFieldAttributes);
+    // //   console.log("inputField setAttribute: ", createInput);
+    // // };
+
+    createInput.setAttribute("type", "number");
+    createInput.setAttribute("max", "16");
+    createInput.setAttribute("min", "0");
+
     d.appendChild(createInput);
     console.log("added input fields: ", d);
   });
@@ -206,7 +223,16 @@ const calcScore = () => {
   console.log("playerInputs: ", app.playerInput);
   for (i = 0; i < shuffledArr.length; i++) {
     if (app.playerInput[i] == shuffledArr[i]) {
-      app.playerScore += 1;
+      if (app.playerInput[i] <= 16 && app.playerInput[i] >= 0) {
+        app.playerScore += 1;
+      }
+      // else {
+      //   alert("Kindly input only numbers from 1 to 16! Try again.");
+      //   // app.playerInput = [];
+      //   mainButton.addEventListener("click", clickCalcScore);
+      //   mainButton.textContent = "Re-try";
+      //   break;
+      // }
     }
   }
   console.log("Player score: ", app.playerScore);
@@ -220,8 +246,32 @@ const clickCalcScore = () => {
   app.screen = "showScore";
   mainButton.textContent = "Restart Game";
   calcScore();
-
+  mainButton.removeEventListener("click", clickCalcScore);
+  mainButton.addEventListener("click", restartGame);
   renderAll();
+};
+
+const restartGame = () => {
+  app.screen = "welcome";
+  mainButton.textContent = "START";
+  const inputArr = document.getElementsByTagName("input");
+
+  while (inputArr.length > 0) {
+    inputArr[0].parentNode.removeChild(inputArr[0]);
+  }
+  mainDivArr.forEach((d) => {
+    console.log("create P");
+    const createP = document.createElement("p");
+    createP.classList.add("square");
+    console.log("add square class: ", createP);
+    d.appendChild(createP);
+  });
+  squaresArr = Array.from(document.getElementsByClassName("square"));
+  shuffledArr = app.numArr.sort(() => Math.random() - 0.5);
+  shuffledArrIdx = 0;
+  mainButton.removeEventListener("click", restartGame);
+
+  main();
 };
 
 /*----- functions -----*/ // -> All other functions e.g renderScreen(), renderAll(), main()
@@ -241,8 +291,18 @@ const renderScreen = () => {
 
 const fillSquare = () => {
   for (i = 0; i < squaresArr.length && i < shuffledArr.length; i++) {
-    console.log("fillSquare loop", squaresArr[i].textContent, shuffledArr[i]);
+    console.log(
+      "fillSquare loop",
+      squaresArr[i].textContent,
+      "seperator",
+      shuffledArr[i]
+    );
     squaresArr[i].textContent = shuffledArr[i];
+    console.log(
+      "fillSquare loop done",
+      squaresArr[i].textContent,
+      shuffledArr[i]
+    );
   }
   squaresArr.forEach((sq) => sq.classList.add("hide"));
 };
