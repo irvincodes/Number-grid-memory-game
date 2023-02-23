@@ -15,6 +15,10 @@ _HTML_ - Standard HTML tags such as divs, buttons, Attributes such as classes, i
 
 _CSS_ - Grid layout implementation, animate method, dimension control values, properties such as color, background color, margins etc.
 
+# Visual Style
+
+The grid plays the main role in the visuals and I have added some animation with box shadows for the squares to give them a glowing effect. The overall theme and colour scheme is consistent with that of Tron, a movie I really like. I felt that it was quite suitable, considering the game has an element of a Grid, consistent with that of the movie. Main colour used was #3dd3ed and font was "Aldrich".
+
 # Getting Started - About The Game
 
 It just started from a simple concept that I had, I was looking for something that I could implement and practise the various Javascript, CSS and HTML techniques that I have learnt.
