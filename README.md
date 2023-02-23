@@ -141,4 +141,10 @@ const flashThree = () => {
 - Leaderboard
 - Audio option
 - Making the code more concise where possible
-- Refactoring the code in the background to make it easy to change the grid size without making much changes to the rest of the code with a few simple variable changes
+- Refactoring the code to make it easy to change the grid size without making much changes to the rest of the code with a few simple variable changes
+
+# Summary
+
+I feel that I achieved what I set out to accomplish for this project and more importantly, managed to utilise many of the techniques learnt over the past 2 weeks of General Assembly's Software Engineering Immersive. I hit roadblocks on many occasions and had to figure some things out over time.
+
+This enabled me to brush up some of my skills and forced me to read additional documentation online to facilitate the completion of this game. With a pretty tight timeline, I think I managed my time fairly well but definitely have much room for improvement in this area moving forward.
