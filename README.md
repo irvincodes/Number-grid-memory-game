@@ -2,7 +2,7 @@
 
 As part of my 1st project in General Assembly's Software Enginneering Programme, I chose to create a number grid memory game to demonstrate the skills I have learnt thus far.
 
-Link to the Live URL:
+Play the game at this Live URL:
 [ The Number Grid Memory Game ](https://irvincodes.github.io/number-grid-memory-game/)
 
 # Technologies Used
