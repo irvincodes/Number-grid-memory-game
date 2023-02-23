@@ -23,26 +23,30 @@
     />
   </head>
   <body>
-    <!-- <div class="wrapper">
-      <div class="img-area">
-        <div class="single-img"></div> -->
-    <!-- <div class="wallpaper"> -->
     <div class="header">
       <h1>The Number Grid Memory Game</h1>
     </div>
     <div id="welcome" class="header">
-      <p class="intro">
+      <p class="p-text">
         Welcome to the grid.<br />
         The grid will flash numbers 1 to 16 on each square, test your focus and
         memory by remembering their positions.
       </p>
-      <h2>Press START To Play</h2>
+    </div>
+    <div id="start" class="header">
+      <h2>Press START To activate grid.</h2>
     </div>
     <div id="numFlash" class="header">
-      <h2>Focus and memorise the position of each flashed number...</h2>
+      <h2>
+        Focus and memorise the position of each flashed number. <br />Cheat at
+        your own peril...
+      </h2>
     </div>
     <div id="playerAns" class="header">
-      <h2>Click each square and input your answer. Good Luck!</h2>
+      <h2>
+        Click each square to input your answer.<br />Legend says it's
+        impossible, but good luck.
+      </h2>
     </div>
     <div id="showScore" class="header">
       <h2>Your score:</h2>
@@ -65,11 +69,13 @@
       <div id="sq-15" class="main-div"><p class="square"></p></div>
       <div id="sq-16" class="main-div"><p class="square"></p></div>
     </main>
-    <button id="button">START</button>
-    <!-- </div> -->
-    <!-- </div>
-    </div> -->
+    <div class="button-div">
+      <p id="game-mode-text" class="p-text">Choose Game Mode:</p>
+      <button id="easy-button" class="button">EASIER</button
+      ><button id="crazy-button" class="button">CRAZIER</button>
+    </div>
+    <div class="button-div">
+      <button id="main-button" class="button">START</button>
+    </div>
   </body>
 </html>
-
-<!-- <input type="value" id="input-1" class="input" min="0" max="16" /> -->

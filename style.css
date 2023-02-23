@@ -13,17 +13,13 @@ h1 {
 }
 
 h2 {
-  position: relative;
-  /* height: 20vmin; */
-  /* padding: 10vmin; */
   margin-top: 0;
-  margin-bottom: 5vmin;
   color: #3dd3ed;
   font-size: 3vmin;
   background-color: #000000;
 }
 
-.intro {
+.p-text {
   background-color: #000000;
   text-align: center;
   color: #3dd3ed;
@@ -31,8 +27,10 @@ h2 {
 }
 
 .header {
+  margin-top: 2vmin;
+  align-content: center;
   text-align: center;
-  /* height: 14vh; */
+  height: 8vmin;
 }
 
 p {
@@ -40,13 +38,9 @@ p {
   color: #3dd3ed;
 }
 
-/* #numFlash {
-  color: maroon;
+.button-div {
+  height: 5vmin;
 }
-
-#playerAns {
-  color: darkgreen;
-} */
 
 #showScore {
   font-size: 2vmin;
@@ -54,36 +48,24 @@ p {
 
 body {
   height: 100vh;
-  /* width: 100vh; */
   margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-image: linear-gradient(45deg, #4b86b4, #adcbe3); */
   background-image: linear-gradient(45deg, #000000, #000000);
   background-image: url("https://i.imgur.com/rJcWN1K.jpg");
   background-size: cover;
 }
 
-/* .wallpaper {
-  animation: kenny 60s linear;
-  background-image: url("https://i.imgur.com/rJcWN1K.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  width: 100vw;
-  opacity: 1;
-  overflow: hidden;
-  scale: 2;
-}
-
-@keyframes kenny {
-  100% {
-    opacity: 0;
-    scale: 1;
+@keyframes shrinkbg {
+  0% {
+    background-size: 110%;
   }
-} */
+  100% {
+    background-size: 100%;
+  }
+}
 
 .main-div {
   animation: 1s linear 0s alternate infinite flicker;
@@ -101,19 +83,16 @@ body {
 }
 
 #grid {
-  /* top: 50vh;
-  position: absolute; */
+  margin-bottom: 1vmin;
+  position: relative;
+  top: 2vmin;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 25% 25% 25% 25%;
-  /* background-color: #2a4d69; */
   background-color: #3dd3ed;
 
   border-radius: 1vmin;
-  /* border: 1.5vmin solid #63ace5; */
   border: 1vmin solid #3dd3ed;
-  /* animation: 1s linear 0s alternate infinite flicker;
-  box-shadow: outset 0 0 1.5rem #3dd3ed; */
 }
 
 #grid > div {
@@ -122,37 +101,23 @@ body {
   align-items: center;
   height: 9vmin;
   width: 9vmin;
-  /* margin: 1.5vh; */
-  /* padding: 0.5vh 0 0 0; */
   background-color: rgb(0, 0, 0);
   border: 0.25vmin solid rgb(255, 255, 255);
-  /* border: 0.2vmin solid greenyellow; */
-
-  /* border-radius: 20%; */
 }
 
 input {
   display: flex;
   animation: 1s linear 0s alternate infinite flicker;
   box-shadow: inset 0 0 1.5vmin #3dd3ed;
-  /* padding: 2rem; */
   height: 8vmin;
   width: 8vmin;
   margin: 0;
   padding: 0;
-  /* border-radius: 20%; */
   color: #3dd3ed;
   text-align: center;
   font-size: 5vmin;
   background-color: rgb(0, 0, 0);
   border: 0 solid rgb(255, 255, 255);
-  /* height: 6vh;
-  width: 6vh;
-  margin: 1vh;
-  padding: 0.5vh 0;
-  background-color: antiquewhite;
-  border: 0.2vmin solid rgb(255, 255, 255);
-  border-radius: 20%; */
 }
 
 .square {
@@ -163,7 +128,6 @@ input {
   text-align: center;
   height: 10vmin;
   width: 10vmin;
-  /* margin: auto; */
 }
 
 #grid > div.avail {
@@ -176,7 +140,7 @@ input {
 
 button {
   position: relative;
-  margin-top: 5vmin;
+  margin-top: 1vmin;
   padding: 1.5vmin;
   background-color: white;
   color: #3dd3ed;
@@ -195,53 +159,16 @@ button:hover:not(:disabled) {
   cursor: pointer;
 }
 
+#easy-button {
+  width: 20vmin;
+  position: relative;
+}
+
+#crazy-button {
+  width: 20vmin;
+  position: relative;
+}
+
 .hide {
   display: none;
 }
-
-/* .hide-transition {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s 2s, opacity 2s linear;
-} */
-
-/* .wrapper {
-  height: 100vh;
-  width: 100%;
-  top: 0;
-  position: relative;
-  display: table;
-}
-
-.img-area {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.single-img {
-  background-image: url("https://i.imgur.com/rJcWN1K.jpg");
-  background-repeat: no-repeat;
-  background-position: 50%;
-  -webkit-background-size: cover;
-  background-size: cover;
-  animation: animatebg ease-in-out 40s 0s infinite;
-  transform: translate3d(0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  width: 100%;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 0;
-}
-
-@keyframes animatebg {
-  15% {
-    transform: scale(2);
-    filter: blur(3px);
-  }
-  100% {
-    transform: scale(1);
-  }
-} */

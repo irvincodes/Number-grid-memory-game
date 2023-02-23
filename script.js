@@ -39,11 +39,11 @@ click into and enter the number.
 13. Extra Levels?
 
 
-
 /*----- constants -----*/ // -> any direct constants e.g BOARD_COLUMNS = 7
 
 /*----- state variables -----*/ // -> Model, where your main "game" or "app" object which stores data go
 const app = {
+  gameMode: ["easy", "crazy"],
   numArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
   playerInput: [],
   playerScore: 0,
@@ -56,75 +56,84 @@ console.log("shuffledArr", shuffledArr);
 
 /*----- cached elements  -----*/ // -> Any cached elements e.g const welcomeScreen = document.querySelector("#welcome");
 const welcomeScreen = document.getElementById("welcome");
+const startScreen = document.getElementById("start");
 const numFlashScreen = document.getElementById("numFlash");
 const playerAnsScreen = document.getElementById("playerAns");
 const showScoreScreen = document.getElementById("showScore");
 const screens = [
   welcomeScreen,
+  startScreen,
   numFlashScreen,
   playerAnsScreen,
   showScoreScreen,
 ];
 const mainDivArr = Array.from(document.getElementsByClassName("main-div"));
-// const getMainDivArr = () => {
-//   for (i = 1; i <= app.numArr.length; i++) {
-//     let divSq = document.getElementById(`sq-${i}`);
-//     mainDivArr.push(divSq);
-//   }
-// };
+
 console.log("mainDivArr: ", mainDivArr);
 
-const mainButton = document.getElementById("button");
+const mainButton = document.getElementById("main-button");
+const easyButton = document.getElementById("easy-button");
+const crazyButton = document.getElementById("crazy-button");
 const grid = document.getElementById("grid");
 const squares = document.getElementsByClassName("square");
 let squaresArr = Array.from(document.getElementsByClassName("square"));
 console.log("squaresArr", squaresArr);
 console.log("squares", squares);
 
-/*----- event listeners -----*/ // -> Any functions that invokes an event listener action to happen e.g function clickStartButton() {game.screen = "game"; renderAll(); }
+/*----- event listeners -----*/ // -> Any functions that invokes an event listener action to happen e.g function clickStartButton() {game.screen = "game"; renderAll(); }, or is activated when event listener action happens
 
-let shuffledArrIdx = 0;
-const gridElement = document.getElementById("grid");
+let arrIdx = 0;
+const flashTwoInOrder = () => {
+  document
+    .querySelector('[id="sq-' + (arrIdx + 1) + '"]')
+    .firstChild.classList.remove("hide");
+
+  document
+    .querySelector('[id="sq-' + (arrIdx + 2) + '"]')
+    .firstChild.classList.remove("hide");
+  const incrShuffledArrIdx = () => (arrIdx += 2);
+  setTimeout(incrShuffledArrIdx, 500);
+  console.log("arrIdx: ", arrIdx);
+};
+
 const flashTwo = () => {
-  console.log("shuffledArrIdx:", shuffledArrIdx);
+  console.log("flashTwo() fired");
+  console.log("arrIdx:", arrIdx);
   console.log("shuffledArr:", shuffledArr);
-  console.log("shuffledArr[shuffledArr]", shuffledArr[shuffledArrIdx]);
-  console.log("shuffledArr[shuffledArr]+1", shuffledArr[shuffledArrIdx + 1]);
+  console.log("shuffledArr[shuffledArr]", shuffledArr[arrIdx]);
+  console.log("shuffledArr[shuffledArr]+1", shuffledArr[arrIdx + 1]);
   console.log(
     "check for hide class",
     document
-      .querySelector("#sq-" + shuffledArr[shuffledArrIdx])
+      .querySelector("#sq-" + shuffledArr[arrIdx])
       .classList.contains("hide"),
     document
-      .querySelector("#sq-" + shuffledArr[shuffledArrIdx + 1])
+      .querySelector("#sq-" + shuffledArr[arrIdx + 1])
       .classList.contains("hide")
   );
   document
-    .querySelector('[id="sq-' + shuffledArr[shuffledArrIdx] + '"]')
+    .querySelector('[id="sq-' + shuffledArr[arrIdx] + '"]')
     .firstChild.classList.remove("hide");
   document
-    .querySelector('[id="sq-' + shuffledArr[shuffledArrIdx + 1] + '"]')
+    .querySelector('[id="sq-' + shuffledArr[arrIdx + 1] + '"]')
     .firstChild.classList.remove("hide");
-  // squares.item(shuffledArr[shuffledArrIdx]).classList.remove("hide");
-  // squares.item(shuffledArr[shuffledArrIdx + 1]).classList.remove("hide");
-  const incrShuffledArrIdx = () => (shuffledArrIdx += 2);
+
+  const incrShuffledArrIdx = () => (arrIdx += 2);
   setTimeout(incrShuffledArrIdx, 500);
 };
-
-// flashTwo();
 
 const flashThree = () => {
   console.log("flashThree() fired");
   document
-    .querySelector('[id="sq-' + shuffledArr[shuffledArrIdx] + '"]')
+    .querySelector('[id="sq-' + shuffledArr[arrIdx] + '"]')
     .firstChild.classList.remove("hide");
   document
-    .querySelector('[id="sq-' + shuffledArr[shuffledArrIdx + 1] + '"]')
+    .querySelector('[id="sq-' + shuffledArr[arrIdx + 1] + '"]')
     .firstChild.classList.remove("hide");
   document
-    .querySelector('[id="sq-' + shuffledArr[shuffledArrIdx + 2] + '"]')
+    .querySelector('[id="sq-' + shuffledArr[arrIdx + 2] + '"]')
     .firstChild.classList.remove("hide");
-  const incrShuffledArrIdx = () => (shuffledArrIdx += 3);
+  const incrShuffledArrIdx = () => (arrIdx += 3);
   setTimeout(incrShuffledArrIdx, 500);
 };
 
@@ -135,13 +144,34 @@ const startNumFlash = () => {
     console.log("count", count);
     hideAll();
     console.log("hideAll() fired");
-    if (count <= 4) flashTwo();
-    else flashThree();
+    if (app.gameMode === "crazy") {
+      if (count <= 4) flashTwo();
+      else flashThree();
 
-    if (count === 6) clearInterval(intervalInstance);
+      const haltNumFlash = () => {
+        console.log("numflash halted");
+        clearInterval(intervalInstance);
+      };
+      mainButton.addEventListener("click", haltNumFlash);
+
+      if (count === 6) clearInterval(intervalInstance);
+    } else if (app.gameMode === "easy") {
+      flashTwoInOrder();
+      const haltNumFlash = () => {
+        console.log("numflash halted");
+        clearInterval(intervalInstance);
+      };
+      mainButton.addEventListener("click", haltNumFlash);
+    }
+    if (count === 7) clearInterval(intervalInstance);
     count++;
   }, app.timer);
-  setTimeout(hideAll, app.timer * 8);
+
+  if (app.gameMode === "crazy") {
+    setTimeout(hideAll, app.timer * 8);
+  } else if (app.gameMode === "easy") {
+    setTimeout(hideAll, app.timer * 9);
+  }
 };
 
 const hideAll = () => {
@@ -167,18 +197,6 @@ const showInputFields = () => {
   console.log("removed squares: ", grid);
   mainDivArr.forEach((d) => {
     const createInput = document.createElement("input");
-    // const inputFieldAttributes = {
-    //   type: "number",
-    //   max: "16",
-    //   min: "0",
-    // };
-    // // const setInputFieldAttributes = (elem, elemAttributes) => {
-    // //   Object.keys(inputFieldAttributes).forEach((attribute) => {
-    // //     elem.setAttribute(attribute, elemAttributes[attribute]);
-    // //   });
-    // //   setInputFieldAttributes(createInput, inputFieldAttributes);
-    // //   console.log("inputField setAttribute: ", createInput);
-    // // };
 
     createInput.setAttribute("type", "number");
     createInput.setAttribute("max", "16");
@@ -187,15 +205,7 @@ const showInputFields = () => {
     d.appendChild(createInput);
     console.log("added input fields: ", d);
   });
-  // const createInput = document.createElement("input");
-  // createInput.setAttribute("type", "value");
-  // console.log("input: ", createInput);
-  // // while (i < squares.length) {
-  // //   grid.appendChild(createInput);
-  // //   i++;
-  // // }
-  // mainDivArr.forEach((d) => d.appendChild(createInput));
-  // console.log("added input fields: ", mainDivArr);
+
   for (i = 1; i <= app.numArr; i++) {
     const inputList = document.getElementsByTagName("input");
     console.log("inputList: ", inputList);
@@ -227,17 +237,7 @@ const calcScore = () => {
         app.playerScore += 1;
         const inputList = document.getElementsByTagName("input");
         inputList[i].style.backgroundColor = "green";
-        // document.getElementById(`sq-${i}`).style.borderColor = "limegreen";
-        // mainDivArr.forEach((d) => {
-        //   d.style.borderColor = "limegreen";
       }
-      // else {
-      //   alert("Kindly input only numbers from 1 to 16! Try again.");
-      //   // app.playerInput = [];
-      //   mainButton.addEventListener("click", clickCalcScore);
-      //   mainButton.textContent = "Re-try";
-      //   break;
-      // }
     } else {
       const inputList = document.getElementsByTagName("input");
       inputList[i].style.backgroundColor = "darkred";
@@ -246,7 +246,6 @@ const calcScore = () => {
   console.log("Player score: ", app.playerScore);
   const scoreMsg = (document.getElementById("showScore").innerHTML =
     "<h2>YOUR SCORE: " + app.playerScore + "</h2>");
-  // document.getElementById("showScore").style.marginBottom = "10vm";
   return scoreMsg;
 };
 
@@ -276,7 +275,7 @@ const restartGame = () => {
   });
   squaresArr = Array.from(document.getElementsByClassName("square"));
   shuffledArr = app.numArr.sort(() => Math.random() - 0.5);
-  shuffledArrIdx = 0;
+  arrIdx = 0;
   mainButton.removeEventListener("click", restartGame);
   app.playerInput = [];
   app.playerScore = 0;
@@ -316,16 +315,36 @@ const fillSquare = () => {
   squaresArr.forEach((sq) => sq.classList.add("hide"));
 };
 
-// const hideInputFields = () => {
-//   for (i = 1; i <= squares.length; i++) {
-//     document.querySelector(`#input-${i}`).classList.add("hide");
-//   }
-// };
+const clickEasy = () => {
+  app.screen = "start";
+  app.gameMode = "easy";
+  document.getElementById("game-mode-text").classList.add("hide");
+  easyButton.classList.add("hide");
+  crazyButton.classList.add("hide");
+  mainButton.classList.remove("hide");
+  renderAll();
+};
+
+const clickCrazy = () => {
+  app.screen = "start";
+  app.gameMode = "crazy";
+  document.getElementById("game-mode-text").classList.add("hide");
+  easyButton.classList.add("hide");
+  crazyButton.classList.add("hide");
+  mainButton.classList.remove("hide");
+  renderAll();
+};
 
 const main = () => {
   fillSquare();
-  // hideInputFields();
   mainButton.addEventListener("click", startNumFlash);
+  mainButton.classList.add("hide");
+  document.getElementById("game-mode-text").classList.remove("hide");
+  easyButton.classList.remove("hide");
+  crazyButton.classList.remove("hide");
+  easyButton.addEventListener("click", clickEasy);
+  crazyButton.addEventListener("click", clickCrazy);
+
   renderAll();
 };
 
