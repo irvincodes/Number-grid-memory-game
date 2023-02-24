@@ -17,7 +17,7 @@ _CSS_ - Grid layout implementation, animate method, dimension control values, pr
 
 # Visual Style
 
-The grid plays the main role in the visuals and I have added some animation with box shadows for the squares to give them a glowing effect. The overall theme and colour scheme is consistent with that of Tron, a movie I really like. I felt that it was quite suitable, considering the game has an element of a Grid, consistent with that of the movie. Main colour used was #3dd3ed and font was "Aldrich".
+The grid plays the main role in the visuals and I have added some animation with box shadows for the squares to give them a glowing effect. The overall theme and colour scheme is consistent with that of Tron, a movie I really like. I felt that it was quite suitable, considering the game has an element of a Grid, consistent with that of the movie. Main colour used is #3dd3ed and font used is "Aldrich".
 
 # Getting Started - About The Game
 
@@ -151,4 +151,4 @@ const flashThree = () => {
 
 I feel that I achieved what I set out to accomplish for this project and more importantly, managed to utilise many of the techniques learnt over the past 2 weeks of General Assembly's Software Engineering Immersive. I hit roadblocks on many occasions and had to figure some things out over time.
 
-This enabled me to brush up some of my skills and forced me to read additional documentation online to facilitate the completion of this game. With a pretty tight timeline, I think I managed my time fairly well but definitely have much room for improvement in this area moving forward.
+This enabled me to brush up some of my skills and encouraged me to read additional documentation online to facilitate the completion of this game. With a pretty tight timeline, I think I managed my time fairly well but definitely have much room for improvement in this area moving forward.
