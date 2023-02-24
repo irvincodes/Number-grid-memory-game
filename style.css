@@ -75,10 +75,10 @@ body {
 
 @keyframes flicker {
   from {
-    box-shadow: inset 0 0 2.25vmin #3dd3ed;
+    box-shadow: inset 0 0 2.5vmin #3dd3ed;
   }
   to {
-    box-shadow: inset 0 0 1vmin #3dd3ed;
+    box-shadow: inset 0 0 1.25vmin #3dd3ed;
   }
 }
 
