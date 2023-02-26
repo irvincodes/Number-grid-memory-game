@@ -143,7 +143,7 @@ const flashThree = () => {
 
 - Player Name Input Field
 - Leaderboard
-- Audio option
+- ~~Audio option~~ \*_Done_
 - Making the code more concise where possible
 - Refactoring the code to make it easy to change the grid size without making much changes to the rest of the code with a few simple variable changes
 
