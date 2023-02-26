@@ -147,6 +147,16 @@ button:hover:not(:disabled) {
   position: relative;
 }
 
+#music-button {
+  width: 15vmin;
+  position: absolute;
+  top: 3vmin;
+  margin-top: 0;
+  font-size: 1.5vmin;
+  padding: 1vmin;
+  border-radius: 1vmin;
+}
+
 .hide {
   display: none;
 }

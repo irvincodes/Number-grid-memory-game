@@ -284,6 +284,36 @@ const restartGame = () => {
 
 /*----- functions -----*/ // -> All other functions e.g renderScreen(), renderAll(), main()
 
+// adding audio referenced from: https://www.youtube.com/watch?v=hsSXzdn_0Gg
+const initMusic = () => {
+  console.log("initMusic fired");
+  let music = new Audio();
+  const playMusic = () => {
+    music.src =
+      "https://irvincodes.github.io/image-audio-files/Tron%20Legacy%20-%20Soundtrack%20OST%20-%2012%20End%20of%20Line%20-%20Daft%20Punk.mp3";
+    music.loop = true;
+    music.play();
+    document
+      .getElementById("music-button")
+      .removeEventListener("click", playMusic);
+    document
+      .getElementById("music-button")
+      .addEventListener("click", playPause);
+    document.getElementById("music-button").textContent = "Music: ON";
+  };
+  document.getElementById("music-button").addEventListener("click", playMusic);
+  const playPause = () => {
+    if (music.paused) {
+      music.play();
+      document.getElementById("music-button").textContent = "Music: ON";
+    } else {
+      music.pause();
+      document.getElementById("music-button").textContent = "Music: OFF";
+    }
+  };
+};
+window.addEventListener("load", initMusic);
+
 const renderAll = () => {
   renderScreen();
 };
